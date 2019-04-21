@@ -2,7 +2,7 @@
 #include <ctime>
 #include <iostream>
 
-#define NUM_PARALLEL_MODES 3
+#define NUM_PARALLEL_MODES 4
 
 // IMPORTANT NOTES:
 // ----------------
@@ -12,13 +12,20 @@
 
 // ----- Static vars ---------------------------------------
 /// ---- Heightmap -----------------------------------------
-static int heightMult = 200;
-static int widthMult = 20;
+static int heightMult = 6900;
+static int widthMult = 100;
 
 /// ---- Animation -----------------------------------------
 
 static bool m_animated = false;
 static int m_forward = 1;
+
+static bool m_increaseHeight = false;
+static bool m_decreaseHeight = false;
+
+static bool m_increaseWidth = false;
+static bool m_decreaseWidth = false;
+
 static double angle = 0;
 
 static int prevX = -1, prevY = -1;
@@ -104,6 +111,12 @@ void GlutFunctions::display()
   showInitPos();
   glRotatef(angle, 0, 1, 0);
 
+  if (m_increaseHeight) { heightMult += 20; }
+  if (m_decreaseHeight) { heightMult -= 20; }
+
+  if (m_increaseWidth) { widthMult += 1; }
+  if (m_decreaseWidth) { widthMult -= 1; }
+
   t.draw(widthMult, heightMult, m_parallelMode);
   textDraw.displayFPS();
   textDraw.displayParallelMode(m_parallelMode);
@@ -175,6 +188,18 @@ void GlutFunctions::specialKeyboardUp(int key, int, int)
   case GLUT_KEY_SHIFT_L:
     m_forward *= -1;
     break;
+  case GLUT_KEY_UP:
+    m_increaseHeight = false;
+    break;
+  case GLUT_KEY_DOWN:
+    m_decreaseHeight = false;
+    break;
+  case GLUT_KEY_LEFT:
+    m_decreaseWidth = false;
+    break;
+  case GLUT_KEY_RIGHT:
+    m_increaseWidth = false;
+    break;
   }
 }
 
@@ -184,6 +209,18 @@ void GlutFunctions::specialKeyboardDown(int key, int, int)
   {
   case GLUT_KEY_SHIFT_L:
     m_forward *= -1;
+    break;
+  case GLUT_KEY_UP:
+    m_increaseHeight = true;
+    break;
+  case GLUT_KEY_DOWN:
+    m_decreaseHeight = true;
+    break;
+  case GLUT_KEY_LEFT:
+    m_decreaseWidth = true;
+    break;
+  case GLUT_KEY_RIGHT:
+    m_increaseWidth = true;
     break;
   }
 }
@@ -251,5 +288,5 @@ void specialKeyboardUp(int key, int x, int y)
 
 void specialKeyboardDown(int key, int x, int y)
 {
-  GF.specialKeyboardDown(key, x, y);
+   GF.specialKeyboardDown(key, x, y);
 }

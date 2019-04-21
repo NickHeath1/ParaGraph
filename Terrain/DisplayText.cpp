@@ -5,6 +5,7 @@ static const char* parallelModeStrings[] =
   "Serial",
   "Serial (4 section divided)",
   "Parallel (4 section divided)",
+  "Parallel (parallel for)",
   "Unknown"
 };
 
