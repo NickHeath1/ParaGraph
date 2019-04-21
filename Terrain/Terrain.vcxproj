@@ -106,13 +106,13 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Terrain\Terrain\_Dependencies</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\ParaGraph\Terrain\_Dependencies</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Terrain\Terrain\_Dependencies\Libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\ParaGraph\Terrain\_Dependencies\Libs</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,19 +144,20 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Terrain\Terrain\_Dependencies</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\ParaGraph\Terrain\_Dependencies</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Terrain\Terrain\_Dependencies\Libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\ParaGraph\Terrain\_Dependencies\Libs</AdditionalLibraryDirectories>
       <AdditionalDependencies>freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="DisplayText.h" />
     <ClInclude Include="DrawTerrain.h" />
     <ClInclude Include="GlutFunctions.h" />
     <ClInclude Include="Image.h" />
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="DisplayText.cpp" />
     <ClCompile Include="DrawTerrain.cpp" />
     <ClCompile Include="GlutFunctions.cpp" />
     <ClCompile Include="Image.cpp" />

@@ -12,7 +12,7 @@ public:
   ~DrawTerrain();
 
   bool loadTerrain(std::string terrainImage);
-  void draw(GLfloat, GLfloat);
+  void draw(GLfloat, GLfloat, int);
 
   Image *getImage() { return m_terrain; }
 

@@ -11,6 +11,8 @@ int main(int argc, char* argv[])
   glutDisplayFunc(display);
   glutKeyboardFunc(keyboardDown);
   glutKeyboardUpFunc(keyboardUp);
+  glutSpecialFunc(specialKeyboardDown);
+  glutSpecialUpFunc(specialKeyboardUp);
   glutIdleFunc(idle);
   glutMainLoop();
 

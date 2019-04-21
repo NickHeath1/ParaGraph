@@ -9,6 +9,8 @@ public:
 	~DisplayText();
 
 	void displayFPS();
+  void displayParallelMode(int parallelMode);
+
 	void drawText(int xPos, int yPos, unsigned char r, unsigned char g, unsigned char b, std::string text);
 
 private:

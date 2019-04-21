@@ -12,12 +12,13 @@
 
 // ----- Static vars ---------------------------------------
 /// ---- Heightmap -----------------------------------------
-static int heightMult = 4000;
+static int heightMult = 200;
 static int widthMult = 20;
 
 /// ---- Animation -----------------------------------------
 
 static bool m_animated = false;
+static int m_forward = 1;
 static double angle = 0;
 
 static int prevX = -1, prevY = -1;
@@ -27,7 +28,8 @@ static auto start_time = time(0);
 static int count = 0;
 
 ///
-static DisplayText *s_fps = new DisplayText();
+static DisplayText textDraw = DisplayText();
+static GlutFunctions GF = GlutFunctions();
 // ---------------------------------------------------------
 
 GlutFunctions::GlutFunctions() :
@@ -72,7 +74,7 @@ void GlutFunctions::other_init()
 
 void GlutFunctions::idle()
 {
-  if (m_animated) angle -= 0.3;
+  if (m_animated) angle -= m_forward * 0.3;
   display();
 }
 
@@ -102,8 +104,9 @@ void GlutFunctions::display()
   showInitPos();
   glRotatef(angle, 0, 1, 0);
 
-  t.draw(widthMult, heightMult);
-  s_fps->displayFPS();
+  t.draw(widthMult, heightMult, m_parallelMode);
+  textDraw.displayFPS();
+  textDraw.displayParallelMode(m_parallelMode);
 
   glFlush();
   glutSwapBuffers();
@@ -111,7 +114,7 @@ void GlutFunctions::display()
 
 void GlutFunctions::keyboardUp(unsigned char key, int x, int y)
 {
-  switch (key)
+  switch (tolower(key))
   {
   case ' ':
     m_animated = false;
@@ -133,7 +136,7 @@ void GlutFunctions::keyboardUp(unsigned char key, int x, int y)
 
 void GlutFunctions::keyboardDown(unsigned char key, int, int)
 {
-  switch (key)
+  switch (tolower(key))
   {
   case ' ':
     m_animated = true;
@@ -158,19 +161,31 @@ void GlutFunctions::keyboardDown(unsigned char key, int, int)
 
 void GlutFunctions::toggleParallelMode()
 {
-  m_parallelMode = ++m_parallelMode % NUM_PARALLEL_MODES;
+  m_parallelMode = (m_forward == 1) ?
+    ++m_parallelMode % NUM_PARALLEL_MODES :
+    (m_parallelMode + NUM_PARALLEL_MODES - 1) % NUM_PARALLEL_MODES;
 
   // TODO: display mode text
 }
 
-void GlutFunctions::specialKeyboardUp(int, int, int)
+void GlutFunctions::specialKeyboardUp(int key, int, int)
 {
-
+  switch (key)
+  {
+  case GLUT_KEY_SHIFT_L:
+    m_forward *= -1;
+    break;
+  }
 }
 
-void GlutFunctions::specialKeyboardDown(int, int, int)
+void GlutFunctions::specialKeyboardDown(int key, int, int)
 {
-
+  switch (key)
+  {
+  case GLUT_KEY_SHIFT_L:
+    m_forward *= -1;
+    break;
+  }
 }
 
 void GlutFunctions::showInitPos()
@@ -201,40 +216,40 @@ void onMouseMove(int x, int y)
 
 void reshape(int width, int height)
 {
-  GlutFunctions().reshapeFunction(width, height);
+  GF.reshapeFunction(width, height);
 }
 
 void render()
 {
-  GlutFunctions().renderFunction();
+  GF.renderFunction();
 }
 
 void display()
 {
-  GlutFunctions().display();
+  GF.display();
 }
 
 void idle()
 {
-  GlutFunctions().idle();
+  GF.idle();
 }
 
 void keyboardUp(unsigned char key, int x, int y)
 {
-  GlutFunctions().keyboardUp(key, x, y);
+  GF.keyboardUp(key, x, y);
 }
 
 void keyboardDown(unsigned char key, int x, int y)
 {
-  GlutFunctions().keyboardDown(key, x, y);
+  GF.keyboardDown(key, x, y);
 }
 
 void specialKeyboardUp(int key, int x, int y)
 {
-  GlutFunctions().specialKeyboardUp(key, x, y);
+  GF.specialKeyboardUp(key, x, y);
 }
 
 void specialKeyboardDown(int key, int x, int y)
 {
-  GlutFunctions().specialKeyboardDown(key, x, y);
+  GF.specialKeyboardDown(key, x, y);
 }
