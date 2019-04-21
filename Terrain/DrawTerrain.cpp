@@ -38,9 +38,9 @@ void DrawTerrain::draw(GLfloat sizeMult, GLfloat heightMult)
 
   if (m_terrain->isValid())
   {
-    for (int i = 0; i < m_terrain->getWidth() - 1; i++)
+    for (int i = 0; i < m_terrain->getWidth() - 1; ++i)
     {
-      for (int j = 0; j < m_terrain->getHeight() - 1; j++)
+      for (int j = 0; j < m_terrain->getHeight() - 1; ++j)
       {
         GLfloat height00 = static_cast<GLfloat>(m_terrain->getPixelAt(i, j).R());
         GLfloat height10 = static_cast<GLfloat>(m_terrain->getPixelAt(i + 1, j).R());
@@ -50,12 +50,10 @@ void DrawTerrain::draw(GLfloat sizeMult, GLfloat heightMult)
         glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2f(i * sizeMult, j * sizeMult);
         glVertex3f(i * sizeMult, height00 * heightMult, j * sizeMult);
+        glTexCoord2f(i * sizeMult, (j + 1) * sizeMult);
+        glVertex3f(i * sizeMult, height01 * heightMult, (j + 1) * sizeMult);
         glTexCoord2f((i + 1) * sizeMult, j * sizeMult);
         glVertex3f((i + 1) * sizeMult, height10 * heightMult, j * sizeMult);
-        glTexCoord2f((i + 1) * sizeMult, (j + 1) * sizeMult);
-        glVertex3f(i * sizeMult, height01 * heightMult, (j + 1) * sizeMult);
-        glTexCoord2f(i * sizeMult, (j + 1) * sizeMult);
-        glVertex3f((i + 1) * sizeMult, height11 * heightMult, (j + 1) * sizeMult);
 
         glEnd();
       }

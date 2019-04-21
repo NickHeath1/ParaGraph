@@ -2,6 +2,8 @@
 #include <ctime>
 #include <iostream>
 
+#define NUM_PARALLEL_MODES 3
+
 // IMPORTANT NOTES:
 // ----------------
 // X: WIDTH
@@ -25,10 +27,11 @@ static auto start_time = time(0);
 static int count = 0;
 // ---------------------------------------------------------
 
-GlutFunctions::GlutFunctions()
+GlutFunctions::GlutFunctions() :
+  m_parallelMode(0)
 {
   setLight(ambientLight, 0.6, 0.6, 0.6, 1);
-  setLight(defaultLight, 0, 0, 0, 1);
+  setLight(defaultLight, 0, 0, 0, 1); 
 }
 
 GlutFunctions::~GlutFunctions()
@@ -143,7 +146,17 @@ void GlutFunctions::keyboardDown(unsigned char key, int, int)
   case 'd':
     
     break;
+  case 'p':
+    toggleParallelMode();
+    break;
   }
+}
+
+void GlutFunctions::toggleParallelMode()
+{
+  m_parallelMode = ++m_parallelMode % NUM_PARALLEL_MODES;
+
+  // TODO: display mode text
 }
 
 void GlutFunctions::specialKeyboardUp(int, int, int)

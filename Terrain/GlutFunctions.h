@@ -21,6 +21,7 @@ public:
   void keyboardDown(unsigned char, int, int);
   void specialKeyboardUp(int, int, int);
   void specialKeyboardDown(int, int, int);
+  void toggleParallelMode();
 
   void init_window(int argc, char** argv, const char* appName);
   void other_init();
@@ -36,6 +37,8 @@ private:
 
   GLfloat ambientLight[4];
   GLfloat defaultLight[4];
+
+  int m_parallelMode;
 };
 
 void reshape(int, int);
