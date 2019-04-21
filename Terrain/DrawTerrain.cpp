@@ -8,7 +8,7 @@ DrawTerrain::DrawTerrain() :
 {
 }
 
-DrawTerrain::DrawTerrain(DrawTerrain & terrain) :
+DrawTerrain::DrawTerrain(DrawTerrain& terrain) :
   m_terrain(terrain.m_terrain)
 {
 }
@@ -160,6 +160,33 @@ void DrawTerrain::draw(GLfloat sizeMult, GLfloat heightMult, int parallelMode)
           }
           //#pragma omp barrier
         }
+      }
+    }
+    else if (parallelMode == 2) // 2 loop parallel sections
+    {
+    }
+    else if (parallelMode == 3) // 3 loop parallel for inner loop
+    {
+#pragma omp parallel for
+      for (int i = 0; i < m_terrain->getWidth() - 1; ++i)
+      {
+        glBegin(GL_TRIANGLE_STRIP);
+//#pragma omp parallel for
+        for (int j = 0; j < m_terrain->getHeight() - 1; ++j)
+        {
+          GLfloat height00 = static_cast<GLfloat>(m_terrain->getPixelAt(i, j).R());
+          GLfloat height10 = static_cast<GLfloat>(m_terrain->getPixelAt(i + 1, j).R());
+          GLfloat height01 = static_cast<GLfloat>(m_terrain->getPixelAt(i, j + 1).R());
+          GLfloat height11 = static_cast<GLfloat>(m_terrain->getPixelAt(i + 1, j + 1).R());
+
+          glTexCoord2f(i * sizeMult, j * sizeMult);
+          glVertex3f(i * sizeMult, height00 * heightMult, j * sizeMult);
+          glTexCoord2f(i * sizeMult, (j + 1) * sizeMult);
+          glVertex3f(i * sizeMult, height01 * heightMult, (j + 1) * sizeMult);
+          glTexCoord2f((i + 1) * sizeMult, j * sizeMult);
+          glVertex3f((i + 1) * sizeMult, height10 * heightMult, j * sizeMult);
+        }
+        glEnd();
       }
     }
   }
