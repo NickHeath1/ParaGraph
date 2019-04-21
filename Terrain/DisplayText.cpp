@@ -1,13 +1,5 @@
 #include "DisplayText.h"
 
-static const char* parallelModeStrings[] =
-{
-  "Serial",
-  "Serial (4 section divided)",
-  "Parallel (4 section divided)",
-  "Unknown"
-};
-
 DisplayText::DisplayText() :
 	m_frame(0),
 	m_time(0),
@@ -26,12 +18,6 @@ void DisplayText::displayFPS()
 		m_frame = 0;
 	}
 	drawText(0, glutGet(GLUT_WINDOW_HEIGHT) - 20, 0, 255, 0, "FPS: " + m_framesString);
-}
-
-void DisplayText::displayParallelMode(int parallelMode)
-{
-  std::string parallelModeString = parallelModeStrings[parallelMode];
-  drawText(0, glutGet(GLUT_WINDOW_HEIGHT) - 40, 0, 255, 0, "Mode: " + parallelModeString);
 }
 
 void DisplayText::drawText(int xPos, int yPos, unsigned char r, unsigned char g, unsigned char b, std::string text)
