@@ -1,6 +1,7 @@
 #include <GL/glew.h>
 #include "Application.h"
 #include "DrawTerrain.h"
+#include "DisplayText.h"
 
 int main(int argc, char* argv[])
 {

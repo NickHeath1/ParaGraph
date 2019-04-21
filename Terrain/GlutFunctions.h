@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/freeglut.h>
 #include "DrawTerrain.h"
+#include "DisplayText.h"
 
 #define ASPECT_RATIO 16/9
 
@@ -21,6 +22,7 @@ public:
   void keyboardDown(unsigned char, int, int);
   void specialKeyboardUp(int, int, int);
   void specialKeyboardDown(int, int, int);
+  void drawText(int xPos, int yPos, std::string text);
 
   void init_window(int argc, char** argv, const char* appName);
   void other_init();
