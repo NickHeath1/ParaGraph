@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/freeglut.h>
 #include "DrawTerrain.h"
+#include "DisplayText.h"
 
 #define ASPECT_RATIO 16/9
 

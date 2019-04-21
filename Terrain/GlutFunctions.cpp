@@ -25,6 +25,9 @@ static int prevX = -1, prevY = -1;
 /// ---- Debug ---------------------------------------------
 static auto start_time = time(0);
 static int count = 0;
+
+///
+static DisplayText *s_fps = new DisplayText();
 // ---------------------------------------------------------
 
 GlutFunctions::GlutFunctions() :
@@ -100,6 +103,7 @@ void GlutFunctions::display()
   glRotatef(angle, 0, 1, 0);
 
   t.draw(widthMult, heightMult);
+  s_fps->displayFPS();
 
   glFlush();
   glutSwapBuffers();
