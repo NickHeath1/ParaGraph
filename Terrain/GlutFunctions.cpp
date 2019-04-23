@@ -1,8 +1,11 @@
 #include "GlutFunctions.h"
 #include <ctime>
 #include <iostream>
+#include <omp.h>
 
 #define NUM_PARALLEL_MODES 4
+#define MIN_NUM_THREADS 1
+#define MAX_NUM_THREADS 64
 
 // IMPORTANT NOTES:
 // ----------------
@@ -40,7 +43,7 @@ static GlutFunctions GF = GlutFunctions();
 // ---------------------------------------------------------
 
 GlutFunctions::GlutFunctions() :
-  m_parallelMode(0)
+	m_parallelMode(0), m_numThreads(1)
 {
   setLight(ambientLight, 0.6, 0.6, 0.6, 1);
   setLight(defaultLight, 0, 0, 0, 1); 
@@ -72,6 +75,7 @@ void GlutFunctions::init_window(int argc, char** argv, const char* appName)
 
 void GlutFunctions::other_init()
 {
+  omp_set_num_threads(1);
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // Set background color
 
   // init viewport
@@ -120,6 +124,7 @@ void GlutFunctions::display()
   t.draw(widthMult, heightMult, m_parallelMode);
   textDraw.displayFPS();
   textDraw.displayParallelMode(m_parallelMode);
+  textDraw.displayThreadCount(m_numThreads);
 
   glFlush();
   glutSwapBuffers();
@@ -166,6 +171,21 @@ void GlutFunctions::keyboardDown(unsigned char key, int, int)
   case 'd':
     
     break;
+  case '-':
+	  if (m_numThreads > MIN_NUM_THREADS)
+	  {
+		  --m_numThreads;
+		  omp_set_num_threads(m_numThreads);
+	  }
+	  break;
+  case '+':
+  case '=':
+	  if (m_numThreads < MAX_NUM_THREADS)
+	  {
+		  ++m_numThreads;
+		  omp_set_num_threads(m_numThreads);
+	  }
+	  break;
   case 'p':
     toggleParallelMode();
     break;
