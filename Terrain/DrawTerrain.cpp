@@ -1,6 +1,5 @@
 #include "DrawTerrain.h"
 #include <iostream>
-#include <omp.h>
 #include <mutex>
 
 DrawTerrain::DrawTerrain() :
@@ -35,8 +34,6 @@ bool DrawTerrain::loadTerrain(std::string terrainImage)
 
 void DrawTerrain::draw(GLfloat sizeMult, GLfloat heightMult, int parallelMode)
 {
-  omp_set_num_threads(4);
-
   glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
   glColor3f(194.0 / 255.0, 178.0 / 255.0, 128.0 / 255.0);
 

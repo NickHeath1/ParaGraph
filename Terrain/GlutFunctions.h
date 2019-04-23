@@ -40,6 +40,7 @@ private:
   GLfloat defaultLight[4];
 
   int m_parallelMode;
+  int m_numThreads;
 };
 
 void reshape(int, int);

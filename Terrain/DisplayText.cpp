@@ -56,6 +56,11 @@ void DisplayText::drawText(int xPos, int yPos, unsigned char r, unsigned char g,
 	glPopMatrix();
 }
 
+void DisplayText::displayThreadCount(int numThreads)
+{
+	drawText(0, glutGet(GLUT_WINDOW_HEIGHT) - 60, 0, 255, 0, "Number of Threads: " + std::to_string(numThreads));
+}
+
 DisplayText::~DisplayText()
 {
 
