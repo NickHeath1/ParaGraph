@@ -35,7 +35,8 @@ bool DrawTerrain::loadTerrain(std::string terrainImage)
 void DrawTerrain::draw(GLfloat sizeMult, GLfloat heightMult, int parallelMode)
 {
   glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-  glColor3f(194.0 / 255.0, 178.0 / 255.0, 128.0 / 255.0);
+  glColor3f(66.0 / 255.0, 158.0 / 255.0, 244.0 / 255.0);
+  //glColor3f(194.0 / 255.0, 178.0 / 255.0, 128.0 / 255.0);
 
   unsigned int terrainWidth = m_terrain->getWidth();
   unsigned int terrainHeight = m_terrain->getHeight();
