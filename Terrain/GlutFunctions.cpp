@@ -3,7 +3,7 @@
 #include <iostream>
 #include <omp.h>
 
-#define NUM_PARALLEL_MODES 6
+#define NUM_PARALLEL_MODES 7
 #define MIN_NUM_THREADS 1
 #define MAX_NUM_THREADS 64
 
@@ -15,8 +15,8 @@
 
 // ----- Static vars ---------------------------------------
 /// ---- Heightmap -----------------------------------------
-static int heightMult = 6900;
-static int widthMult = 100;
+static int heightMult = 3420;
+static int widthMult = 285;
 
 /// ---- Animation -----------------------------------------
 
@@ -250,10 +250,10 @@ void GlutFunctions::showInitPos()
   // Default position is looking in -z. The image is drawn in the +x, +z region.
   // Rotate such that we are looking in that direction
   glRotatef(180.0, 1, 0, 0);
-  glRotatef(5.0, 1, 0, 0);
+  glRotatef(20.0, 1, 0, 0);
 
   // Translate to the height of the heightmap where we currently are (0, 0);
-  glTranslatef(0, -(t.getImage()->getPixelAt(0,0).R() * heightMult) +2000, 0);
+  glTranslatef(0, -(t.getImage()->getPixelAt(0,0).R() * heightMult) + 5000, 0);
 }
 
 // -----------------------------------------------------

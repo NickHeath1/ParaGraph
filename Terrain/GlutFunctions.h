@@ -5,7 +5,7 @@
 
 #define ASPECT_RATIO 16/9
 
-static DrawTerrain t("terrain3.bmp");
+static DrawTerrain t("terrain_test.bmp");
 
 class GlutFunctions
 {
