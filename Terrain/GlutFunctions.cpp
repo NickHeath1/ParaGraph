@@ -3,7 +3,7 @@
 #include <iostream>
 #include <omp.h>
 
-#define NUM_PARALLEL_MODES 4
+#define NUM_PARALLEL_MODES 6
 #define MIN_NUM_THREADS 1
 #define MAX_NUM_THREADS 64
 
